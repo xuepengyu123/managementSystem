@@ -60,7 +60,7 @@ public class GenUtils {
 		tableEntity.setClassname(StringUtils.uncapitalize(className));
 		
 		//列信息
-		List<ColumnEntity> columsList = new ArrayList<>();
+		List<ColumnEntity> columnList = new ArrayList<>();
 		for(Map<String, String> column : columns){
 			ColumnEntity columnEntity = new ColumnEntity();
 			columnEntity.setColumnName(column.get("columnName"));
@@ -83,10 +83,10 @@ public class GenUtils {
 			if("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null){
 				tableEntity.setPk(columnEntity);
 			}
-			
-			columsList.add(columnEntity);
+
+			columnList.add(columnEntity);
 		}
-		tableEntity.setColumns(columsList);
+		tableEntity.setColumns(columnList);
 		
 		//没主键，则第一个字段为主键
 		if(tableEntity.getPk() == null){
@@ -99,7 +99,7 @@ public class GenUtils {
 		Velocity.init(prop);
 
 		String mainPath = config.getString("mainPath" );
-		mainPath = StringUtils.isBlank(mainPath) ? "com.sys.managef" : mainPath;
+		mainPath = StringUtils.isBlank(mainPath) ? "com.sys.manage" : mainPath;
 		
 		//封装模板数据
 		Map<String, Object> map = new HashMap<>();
