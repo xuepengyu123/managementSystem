@@ -9,7 +9,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     #MySQL配置
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/renren_security?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/management_system?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
     #oracle配置
@@ -19,12 +19,12 @@ spring:
 #    password: 123456
     #SQLServer配置
 #    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#    url: jdbc:sqlserver://192.168.10.10:1433;DatabaseName=renren_security
+#    url: jdbc:sqlserver://192.168.10.10:1433;DatabaseName=management_system
 #    username: sa
 #    password: 123456
     #PostgreSQL配置
 #    driverClassName: org.postgresql.Driver
-#    url: jdbc:postgresql://192.168.10.10:5432/renren_security
+#    url: jdbc:postgresql://192.168.10.10:5432/management_system
 #    username: postgres
 #    password: 123456
   jackson:
@@ -45,5 +45,5 @@ pagehelper:
 
 
 #指定数据库，可选值有【mysql、oracle、sqlserver、postgresql】
-renren:
+management:
   database: mysql
