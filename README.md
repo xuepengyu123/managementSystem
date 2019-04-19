@@ -25,10 +25,10 @@
 
 **项目结构** 
 ```
-renren-security
-├─renren-common     公共模块
+management-security
+├─management-common     公共模块
 │ 
-├─renren-admin      管理后台
+├─management-admin      管理后台
 │    ├─db  数据库SQL脚本
 │    │ 
 │    ├─modules  模块
@@ -46,9 +46,9 @@ renren-security
 │        └─application.yml   全局配置文件
 │       
 │ 
-├─renren-api        API服务
+├─management-api        API服务
 │ 
-├─renren-generator  代码生成器
+├─management-generator  代码生成器
 │        └─resources 
 │           ├─mapper   MyBatis文件
 │           ├─template 代码生成器模板（可增加或修改相应模板）
