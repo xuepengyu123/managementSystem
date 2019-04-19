@@ -14,18 +14,7 @@ var vm = new Vue({
 		main:"main.html",
         navTitle:"欢迎页"
 	},
-    methods: {
-        donate: function () {
-            layer.open({
-                type: 2,
-                title: false,
-                area: ['806px', '467px'],
-                closeBtn: 1,
-                shadeClose: false,
-                content: ['http://cdn.renren.io/donate.jpg', 'no']
-            });
-        }
-    }
+    methods: {}
 });
 
 //路由
