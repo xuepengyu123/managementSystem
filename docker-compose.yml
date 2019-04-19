@@ -1,13 +1,13 @@
 version: '2'
 services:
   management-admin:
-    image: renren/admin
+    image: management/admin
     ports:
       - "8080:8080"
     environment:
       - spring.profiles.active=dev
-  renren-api:
-    image: renren/api
+  management-api:
+    image: management/api
     ports:
       - "8081:8081"
     environment:
