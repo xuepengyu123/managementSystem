@@ -8,34 +8,26 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 系统用户
+ * 租户信息表
  * 
  * @author xue
  * @email xuepy@belink.com
- * @date 2019-04-18 16:14:26
+ * @date 2019-04-25 09:30:33
  */
 @Data
-@TableName("sys_test")
-public class SysTestEntity implements Serializable {
+@TableName("sys_tenant_info")
+public class SysTenantInfoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
+	 * 租户id
 	 */
 	@TableId
-	private Long userId;
+	private Long tenantId;
 	/**
-	 * 用户名
+	 * 租户名称
 	 */
-	private String username;
-	/**
-	 * 邮箱
-	 */
-	private String email;
-	/**
-	 * 手机号
-	 */
-	private String mobile;
+	private String tenantName;
 	/**
 	 * 状态  0：禁用   1：正常
 	 */
@@ -44,5 +36,9 @@ public class SysTestEntity implements Serializable {
 	 * 创建时间
 	 */
 	private Date createTime;
+	/**
+	 * 修改时间
+	 */
+	private Date updateTime;
 
 }

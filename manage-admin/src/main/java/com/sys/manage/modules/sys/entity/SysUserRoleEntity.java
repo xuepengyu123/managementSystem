@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户与角色对应关系
@@ -27,5 +28,13 @@ public class SysUserRoleEntity implements Serializable {
      * 角色ID
      */
     private Long roleId;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
 
 }
