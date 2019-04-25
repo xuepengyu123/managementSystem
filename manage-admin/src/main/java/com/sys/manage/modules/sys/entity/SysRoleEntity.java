@@ -73,4 +73,9 @@ public class SysRoleEntity implements Serializable {
      */
     @TableField(exist = false)
     private String tenantName;
+    /**
+     * 租户ID列表
+     */
+    @TableField(exist = false)
+    private List<Long> tenantIdList;
 }

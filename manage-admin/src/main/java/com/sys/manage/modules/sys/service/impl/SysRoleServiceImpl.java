@@ -12,6 +12,7 @@ import com.sys.manage.modules.sys.entity.SysDeptEntity;
 import com.sys.manage.modules.sys.entity.SysRoleEntity;
 import com.sys.manage.modules.sys.entity.SysTenantEntity;
 import com.sys.manage.modules.sys.service.*;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -69,7 +71,10 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveRole(SysRoleEntity role) {
-        role.setCreateTime(new Date());
+        List<Long> tenantIdList = role.getTenantIdList();
+        if(tenantIdList!=null){
+            role.setTenantId(tenantIdList.get(0));
+        }
         this.save(role);
 
         //保存角色与菜单关系

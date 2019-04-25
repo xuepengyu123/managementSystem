@@ -46,7 +46,7 @@
 				<div class="col-sm-2 control-label">所属租户</div>
 				<div class="col-sm-10">
 					<label v-for="tenant in tenantList" class="checkbox-inline">
-						<input type="checkbox" :value="tenant.tenantId" v-model="role.tenantList">{{tenant.tenantName}}
+						<input type="checkbox" :value="tenant.tenantId" v-model="role.tenantIdList">{{tenant.tenantName}}
 					</label>
 				</div>
 			</div>
