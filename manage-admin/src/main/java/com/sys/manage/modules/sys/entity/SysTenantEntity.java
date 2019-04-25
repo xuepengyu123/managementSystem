@@ -15,8 +15,8 @@ import java.util.Date;
  * @date 2019-04-25 09:30:33
  */
 @Data
-@TableName("sys_tenant_info")
-public class SysTenantInfoEntity implements Serializable {
+@TableName("sys_tenant")
+public class SysTenantEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

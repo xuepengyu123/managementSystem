@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sys.manage.modules.sys.dao.SysTenantInfoDao">
+<mapper namespace="com.sys.manage.modules.sys.dao.SysTenantDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.sys.manage.modules.sys.entity.SysTenantInfoEntity" id="sysTenantInfoMap">
+    <resultMap type="com.sys.manage.modules.sys.entity.SysTenantEntity" id="sysTenantMap">
         <result property="tenantId" column="tenant_id"/>
         <result property="tenantName" column="tenant_name"/>
         <result property="status" column="status"/>

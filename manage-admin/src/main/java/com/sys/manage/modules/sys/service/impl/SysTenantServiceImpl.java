@@ -8,19 +8,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.manage.common.utils.PageUtils;
 import com.sys.manage.common.utils.Query;
 
-import com.sys.manage.modules.sys.dao.SysTenantInfoDao;
-import com.sys.manage.modules.sys.entity.SysTenantInfoEntity;
-import com.sys.manage.modules.sys.service.SysTenantInfoService;
+import com.sys.manage.modules.sys.dao.SysTenantDao;
+import com.sys.manage.modules.sys.entity.SysTenantEntity;
+import com.sys.manage.modules.sys.service.SysTenantService;
 
 
-@Service("sysTenantInfoService")
-public class SysTenantInfoServiceImpl extends ServiceImpl<SysTenantInfoDao, SysTenantInfoEntity> implements SysTenantInfoService {
+@Service("sysTenantService")
+public class SysTenantServiceImpl extends ServiceImpl<SysTenantDao, SysTenantEntity> implements SysTenantService {
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        IPage<SysTenantInfoEntity> page = this.page(
-                new Query<SysTenantInfoEntity>().getPage(params),
-                new QueryWrapper<SysTenantInfoEntity>()
+        IPage<SysTenantEntity> page = this.page(
+                new Query<SysTenantEntity>().getPage(params),
+                new QueryWrapper<SysTenantEntity>()
         );
 
         return new PageUtils(page);

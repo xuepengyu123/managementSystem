@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'sys/systenantinfo/list',
+        url: baseURL + 'sys/tenant/list',
         datatype: "json",
         colModel: [			
 			{ label: 'tenantId', name: 'tenantId', index: 'tenant_id', width: 50, key: true },
@@ -41,7 +41,7 @@ var vm = new Vue({
 	data:{
 		showList: true,
 		title: null,
-		sysTenantInfo: {}
+		tenant: {}
 	},
 	methods: {
 		query: function () {
@@ -50,7 +50,7 @@ var vm = new Vue({
 		add: function(){
 			vm.showList = false;
 			vm.title = "新增";
-			vm.sysTenantInfo = {};
+			vm.tenant = {};
 		},
 		update: function (event) {
 			var tenantId = getSelectedRow();
@@ -64,12 +64,12 @@ var vm = new Vue({
 		},
 		saveOrUpdate: function (event) {
 		    $('#btnSaveOrUpdate').button('loading').delay(1000).queue(function() {
-                var url = vm.sysTenantInfo.tenantId == null ? "sys/systenantinfo/save" : "sys/systenantinfo/update";
+                var url = vm.tenant.tenantId == null ? "sys/tenant/save" : "sys/tenant/update";
                 $.ajax({
                     type: "POST",
                     url: baseURL + url,
                     contentType: "application/json",
-                    data: JSON.stringify(vm.sysTenantInfo),
+                    data: JSON.stringify(vm.tenant),
                     success: function(r){
                         if(r.code === 0){
                              layer.msg("操作成功", {icon: 1});
@@ -98,7 +98,7 @@ var vm = new Vue({
                     lock = true;
 		            $.ajax({
                         type: "POST",
-                        url: baseURL + "sys/systenantinfo/delete",
+                        url: baseURL + "sys/tenant/delete",
                         contentType: "application/json",
                         data: JSON.stringify(tenantIds),
                         success: function(r){
@@ -115,8 +115,8 @@ var vm = new Vue({
              });
 		},
 		getInfo: function(tenantId){
-			$.get(baseURL + "sys/systenantinfo/info/"+tenantId, function(r){
-                vm.sysTenantInfo = r.sysTenantInfo;
+			$.get(baseURL + "sys/tenant/info/"+tenantId, function(r){
+                vm.tenant = r.tenant;
             });
 		},
 		reload: function (event) {
