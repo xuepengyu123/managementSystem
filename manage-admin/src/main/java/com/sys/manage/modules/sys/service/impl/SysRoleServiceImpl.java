@@ -71,10 +71,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveRole(SysRoleEntity role) {
-        List<Long> tenantIdList = role.getTenantIdList();
-        if(tenantIdList!=null){
-            role.setTenantId(tenantIdList.get(0));
-        }
         this.save(role);
 
         //保存角色与菜单关系
