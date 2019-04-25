@@ -2,7 +2,8 @@
 
 package com.sys.manage.common.utils;
 
-import com.alibaba.fastjson.JSON;
+//import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
@@ -81,13 +82,16 @@ public class RedisUtils {
                 object instanceof Double || object instanceof Boolean || object instanceof String){
             return String.valueOf(object);
         }
-        return JSON.toJSONString(object);
+//        return JSON.toJSONString(object);
+        return new Gson().toJson(object);
     }
 
     /**
      * JSON数据，转成Object
      */
     private <T> T fromJson(String json, Class<T> clazz){
-        return JSON.parseObject(json, clazz);
+
+//        return JSON.parseObject(json, clazz);
+        return new Gson().fromJson(json,clazz);
     }
 }
