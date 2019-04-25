@@ -51,6 +51,16 @@ public class SysDeptEntity implements Serializable {
      */
     private Date updateTime;
     /**
+     * 租户id
+     */
+    private Long tenantId;
+    /**
+     * 租户名称
+     */
+    @TableField(exist = false)
+    private String tenantName;
+
+    /**
      * ztree属性
      */
     @TableField(exist = false)

@@ -10,6 +10,7 @@ import com.sys.manage.common.utils.Query;
 import com.sys.manage.modules.sys.dao.SysRoleDao;
 import com.sys.manage.modules.sys.entity.SysDeptEntity;
 import com.sys.manage.modules.sys.entity.SysRoleEntity;
+import com.sys.manage.modules.sys.entity.SysTenantInfoEntity;
 import com.sys.manage.modules.sys.service.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +37,13 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
     private SysUserRoleService sysUserRoleService;
     @Autowired
     private SysDeptService sysDeptService;
+    @Autowired
+    private SysTenantInfoService sysTenantInfoService;
 
     @Override
     @DataFilter(subDept = true, user = false)
     public PageUtils queryPage(Map<String, Object> params) {
         String roleName = (String) params.get("roleName");
-
         IPage<SysRoleEntity> page = this.page(
                 new Query<SysRoleEntity>().getPage(params),
                 new QueryWrapper<SysRoleEntity>()
@@ -50,12 +52,17 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
         );
 
         for (SysRoleEntity sysRoleEntity : page.getRecords()) {
+            // 查询机构名称
             SysDeptEntity sysDeptEntity = sysDeptService.getById(sysRoleEntity.getDeptId());
             if (sysDeptEntity != null) {
                 sysRoleEntity.setDeptName(sysDeptEntity.getName());
             }
+            // 查询租户名称
+            SysTenantInfoEntity sysTenantInfoEntity = sysTenantInfoService.getById(sysRoleEntity.getTenantId());
+            if (sysTenantInfoEntity != null) {
+                sysRoleEntity.setTenantName(sysTenantInfoEntity.getTenantName());
+            }
         }
-
         return new PageUtils(page);
     }
 
