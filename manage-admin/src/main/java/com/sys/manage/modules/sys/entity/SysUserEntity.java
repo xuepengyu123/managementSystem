@@ -76,6 +76,20 @@ public class SysUserEntity implements Serializable {
      * 创建时间
      */
     private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
+    /**
+     /**
+     * 租户id
+     */
+    private Long tenantId;
+    /**
+     * 租户名称
+     */
+    @TableField(exist = false)
+    private String tenantName;
 
     /**
      * 部门ID

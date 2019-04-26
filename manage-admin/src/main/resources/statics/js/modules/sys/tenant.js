@@ -1,14 +1,13 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'sys/systest/list',
+        url: baseURL + 'sys/tenant/list',
         datatype: "json",
         colModel: [			
-			{ label: 'userId', name: 'userId', index: 'user_id', width: 50, key: true },
-			{ label: '用户名', name: 'username', index: 'username', width: 80 }, 			
-			{ label: '邮箱', name: 'email', index: 'email', width: 80 }, 			
-			{ label: '手机号', name: 'mobile', index: 'mobile', width: 80 }, 			
+			{ label: 'tenantId', name: 'tenantId', index: 'tenant_id', width: 50, key: true },
+			{ label: '租户名称', name: 'tenantName', index: 'tenant_name', width: 80 }, 			
 			{ label: '状态  0：禁用   1：正常', name: 'status', index: 'status', width: 80 }, 			
-			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 }			
+			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 }, 			
+			{ label: '修改时间', name: 'updateTime', index: 'update_time', width: 80 }			
         ],
 		viewrecords: true,
         height: 385,
@@ -42,7 +41,7 @@ var vm = new Vue({
 	data:{
 		showList: true,
 		title: null,
-		sysTest: {}
+		tenant: {}
 	},
 	methods: {
 		query: function () {
@@ -51,26 +50,26 @@ var vm = new Vue({
 		add: function(){
 			vm.showList = false;
 			vm.title = "新增";
-			vm.sysTest = {};
+			vm.tenant = {};
 		},
 		update: function (event) {
-			var userId = getSelectedRow();
-			if(userId == null){
+			var tenantId = getSelectedRow();
+			if(tenantId == null){
 				return ;
 			}
 			vm.showList = false;
             vm.title = "修改";
             
-            vm.getInfo(userId)
+            vm.getInfo(tenantId)
 		},
 		saveOrUpdate: function (event) {
 		    $('#btnSaveOrUpdate').button('loading').delay(1000).queue(function() {
-                var url = vm.sysTest.userId == null ? "sys/systest/save" : "sys/systest/update";
+                var url = vm.tenant.tenantId == null ? "sys/tenant/save" : "sys/tenant/update";
                 $.ajax({
                     type: "POST",
                     url: baseURL + url,
                     contentType: "application/json",
-                    data: JSON.stringify(vm.sysTest),
+                    data: JSON.stringify(vm.tenant),
                     success: function(r){
                         if(r.code === 0){
                              layer.msg("操作成功", {icon: 1});
@@ -87,8 +86,8 @@ var vm = new Vue({
 			});
 		},
 		del: function (event) {
-			var userIds = getSelectedRows();
-			if(userIds == null){
+			var tenantIds = getSelectedRows();
+			if(tenantIds == null){
 				return ;
 			}
 			var lock = false;
@@ -99,9 +98,9 @@ var vm = new Vue({
                     lock = true;
 		            $.ajax({
                         type: "POST",
-                        url: baseURL + "sys/systest/delete",
+                        url: baseURL + "sys/tenant/delete",
                         contentType: "application/json",
-                        data: JSON.stringify(userIds),
+                        data: JSON.stringify(tenantIds),
                         success: function(r){
                             if(r.code == 0){
                                 layer.msg("操作成功", {icon: 1});
@@ -115,9 +114,9 @@ var vm = new Vue({
              }, function(){
              });
 		},
-		getInfo: function(userId){
-			$.get(baseURL + "sys/systest/info/"+userId, function(r){
-                vm.sysTest = r.sysTest;
+		getInfo: function(tenantId){
+			$.get(baseURL + "sys/tenant/info/"+tenantId, function(r){
+                vm.tenant = r.tenant;
             });
 		},
 		reload: function (event) {

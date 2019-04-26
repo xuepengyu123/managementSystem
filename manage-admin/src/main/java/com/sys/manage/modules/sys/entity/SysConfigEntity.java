@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 /**
  * 系统配置信息
@@ -21,5 +22,13 @@ public class SysConfigEntity {
     @NotBlank(message = "参数值不能为空")
     private String paramValue;
     private String remark;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
 
 }

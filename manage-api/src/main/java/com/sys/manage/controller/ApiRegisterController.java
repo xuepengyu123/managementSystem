@@ -40,7 +40,6 @@ public class ApiRegisterController {
         user.setMobile(form.getMobile());
         user.setUsername(form.getMobile());
         user.setPassword(DigestUtils.sha256Hex(form.getPassword()));
-        user.setCreateTime(new Date());
         userService.save(user);
 
         return R.ok();

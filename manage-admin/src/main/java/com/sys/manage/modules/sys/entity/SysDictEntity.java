@@ -7,6 +7,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 数据字典
@@ -53,5 +54,14 @@ public class SysDictEntity implements Serializable {
      */
     @TableLogic
     private Integer delFlag;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
 
 }

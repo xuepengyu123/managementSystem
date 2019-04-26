@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 
@@ -41,6 +42,24 @@ public class SysDeptEntity implements Serializable {
     private Integer orderNum;
     @TableLogic
     private Integer delFlag;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
+    /**
+     * 租户id
+     */
+    private Long tenantId;
+    /**
+     * 租户名称
+     */
+    @TableField(exist = false)
+    private String tenantName;
+
     /**
      * ztree属性
      */

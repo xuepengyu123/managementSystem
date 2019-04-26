@@ -8,19 +8,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.manage.common.utils.PageUtils;
 import com.sys.manage.common.utils.Query;
 
-import com.sys.manage.modules.sys.dao.SysTestDao;
-import com.sys.manage.modules.sys.entity.SysTestEntity;
-import com.sys.manage.modules.sys.service.SysTestService;
+import com.sys.manage.modules.sys.dao.SysTenantDao;
+import com.sys.manage.modules.sys.entity.SysTenantEntity;
+import com.sys.manage.modules.sys.service.SysTenantService;
 
 
-@Service("sysTestService")
-public class SysTestServiceImpl extends ServiceImpl<SysTestDao, SysTestEntity> implements SysTestService {
+@Service("sysTenantService")
+public class SysTenantServiceImpl extends ServiceImpl<SysTenantDao, SysTenantEntity> implements SysTenantService {
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        IPage<SysTestEntity> page = this.page(
-                new Query<SysTestEntity>().getPage(params),
-                new QueryWrapper<SysTestEntity>()
+        IPage<SysTenantEntity> page = this.page(
+                new Query<SysTenantEntity>().getPage(params),
+                new QueryWrapper<SysTenantEntity>()
         );
 
         return new PageUtils(page);
