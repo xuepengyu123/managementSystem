@@ -3,7 +3,9 @@ package com.sys.manage.modules.sys.controller;
 import com.sys.manage.common.utils.Constant;
 import com.sys.manage.common.utils.R;
 import com.sys.manage.modules.sys.entity.SysDeptEntity;
+import com.sys.manage.modules.sys.entity.SysTenantEntity;
 import com.sys.manage.modules.sys.service.SysDeptService;
+import com.sys.manage.modules.sys.service.SysTenantService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,8 @@ import java.util.List;
 public class SysDeptController extends AbstractController {
     @Autowired
     private SysDeptService sysDeptService;
+    @Autowired
+    private SysTenantService sysTenantService;
 
     /**
      * 列表
@@ -91,6 +95,11 @@ public class SysDeptController extends AbstractController {
     @RequiresPermissions("sys:dept:info")
     public R info(@PathVariable("deptId") Long deptId) {
         SysDeptEntity dept = sysDeptService.getById(deptId);
+        // 查询租户名称
+        SysTenantEntity sysTenantEntity = sysTenantService.getById(dept.getTenantId());
+        if (sysTenantEntity != null) {
+            dept.setTenantName(sysTenantEntity.getTenantName());
+        }
 
         return R.ok().put("dept", dept);
     }

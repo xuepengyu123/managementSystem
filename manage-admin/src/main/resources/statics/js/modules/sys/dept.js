@@ -22,7 +22,8 @@ var vm = new Vue({
             parentName:null,
             parentId:0,
             orderNum:0
-        }
+        },
+        tenantList: {}
     },
     methods: {
         getDept: function(){
@@ -38,8 +39,10 @@ var vm = new Vue({
         add: function(){
             vm.showList = false;
             vm.title = "新增";
-            vm.dept = {parentName:null,parentId:0,orderNum:0};
+            vm.dept = {parentName:null,parentId:0,orderNum:0,tenantId:null};
+            vm.tenantList = {};
             vm.getDept();
+            vm.getTenantList();
         },
         update: function () {
             var deptId = getDeptId();
@@ -51,8 +54,8 @@ var vm = new Vue({
                 vm.showList = false;
                 vm.title = "修改";
                 vm.dept = r.dept;
-
                 vm.getDept();
+                vm.getTenantList();
             });
         },
         del: function () {
@@ -117,6 +120,11 @@ var vm = new Vue({
                 }
             });
         },
+        getTenantList: function () {
+            $.get(baseURL + "sys/tenant/select", function (r) {
+                vm.tenantList = r.list;
+            });
+        },
         reload: function () {
             vm.showList = true;
             Dept.table.refresh();
@@ -139,7 +147,8 @@ Dept.initColumn = function () {
         {title: '部门ID', field: 'deptId', visible: false, align: 'center', valign: 'middle', width: '80px'},
         {title: '部门名称', field: 'name', align: 'center', valign: 'middle', sortable: true, width: '180px'},
         {title: '上级部门', field: 'parentName', align: 'center', valign: 'middle', sortable: true, width: '100px'},
-        {title: '排序号', field: 'orderNum', align: 'center', valign: 'middle', sortable: true, width: '100px'}]
+        {title: '排序号', field: 'orderNum', align: 'center', valign: 'middle', sortable: true, width: '100px'},
+        {title: '租户名称', field: 'tenantName', align: 'center', valign: 'middle', sortable: true, width: '100px'}]
     return columns;
 };
 
