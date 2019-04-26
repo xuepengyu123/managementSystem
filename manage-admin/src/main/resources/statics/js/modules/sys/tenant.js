@@ -2,8 +2,9 @@ $(function () {
     $("#jqGrid").jqGrid({
         url: baseURL + 'sys/tenant/list',
         datatype: "json",
-        colModel: [			
-			{ label: '租户名称', name: 'tenantName', index: 'tenant_name', width: 80 },
+        colModel: [
+            { label: '租户ID', name: 'tenantId', index: "tenant_id", width: 45, key: true},
+            { label: '租户名称', name: 'tenantName', index: 'tenant_name', width: 80 },
 			{ label: '备注', name: 'remark', index: 'remark', width: 80 },
 			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 }
         ],
