@@ -3,11 +3,9 @@ $(function () {
         url: baseURL + 'sys/tenant/list',
         datatype: "json",
         colModel: [			
-			{ label: 'tenantId', name: 'tenantId', index: 'tenant_id', width: 50, key: true },
-			{ label: '租户名称', name: 'tenantName', index: 'tenant_name', width: 80 }, 			
-			{ label: '状态  0：禁用   1：正常', name: 'status', index: 'status', width: 80 }, 			
-			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 }, 			
-			{ label: '修改时间', name: 'updateTime', index: 'update_time', width: 80 }			
+			{ label: '租户名称', name: 'tenantName', index: 'tenant_name', width: 80 },
+			{ label: '备注', name: 'remark', index: 'remark', width: 80 },
+			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 }
         ],
 		viewrecords: true,
         height: 385,
