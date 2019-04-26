@@ -10,8 +10,10 @@ import com.sys.manage.common.utils.PageUtils;
 import com.sys.manage.common.utils.Query;
 import com.sys.manage.modules.sys.dao.SysUserDao;
 import com.sys.manage.modules.sys.entity.SysDeptEntity;
+import com.sys.manage.modules.sys.entity.SysTenantEntity;
 import com.sys.manage.modules.sys.entity.SysUserEntity;
 import com.sys.manage.modules.sys.service.SysDeptService;
+import com.sys.manage.modules.sys.service.SysTenantService;
 import com.sys.manage.modules.sys.service.SysUserRoleService;
 import com.sys.manage.modules.sys.service.SysUserService;
 import com.sys.manage.modules.sys.shiro.ShiroUtils;
@@ -37,6 +39,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
     private SysUserRoleService sysUserRoleService;
     @Autowired
     private SysDeptService sysDeptService;
+    @Autowired
+    private SysTenantService sysTenantService;
 
     @Override
     public List<Long> queryAllMenuId(Long userId) {
@@ -58,6 +62,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
         for (SysUserEntity sysUserEntity : page.getRecords()) {
             SysDeptEntity sysDeptEntity = sysDeptService.getById(sysUserEntity.getDeptId());
             sysUserEntity.setDeptName(sysDeptEntity.getName());
+
+            SysTenantEntity sysTenantEntity = sysTenantService.getById(sysUserEntity.getTenantId());
+            if (sysTenantEntity != null) {
+                sysUserEntity.setTenantName(sysTenantEntity.getTenantName());
+            }
         }
 
         return new PageUtils(page);
