@@ -31,6 +31,10 @@ public class SysTenantEntity implements Serializable {
 	 */
 	private String tenantName;
 	/**
+	 * 备注
+	 */
+	private String remark;
+	/**
 	 * 状态  0：禁用   1：正常
 	 */
 	private Integer status;

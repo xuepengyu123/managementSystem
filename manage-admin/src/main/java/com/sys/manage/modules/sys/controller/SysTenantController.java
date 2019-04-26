@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 /**
  * 租户信息表
  *
@@ -33,7 +32,7 @@ public class SysTenantController {
      */
     @RequestMapping("/list")
     @RequiresPermissions("sys:tenant:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = sysTenantService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -45,7 +44,7 @@ public class SysTenantController {
      */
     @RequestMapping("/info/{tenantId}")
     @RequiresPermissions("sys:tenant:info")
-    public R info(@PathVariable("tenantId") Long tenantId){
+    public R info(@PathVariable("tenantId") Long tenantId) {
         SysTenantEntity sysTenant = sysTenantService.getById(tenantId);
 
         return R.ok().put("tenant", sysTenant);
@@ -56,9 +55,8 @@ public class SysTenantController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("sys:tenant:save")
-    public R save(@RequestBody SysTenantEntity sysTenant){
+    public R save(@RequestBody SysTenantEntity sysTenant) {
         sysTenantService.save(sysTenant);
-
         return R.ok();
     }
 
@@ -67,10 +65,10 @@ public class SysTenantController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("sys:tenant:update")
-    public R update(@RequestBody SysTenantEntity sysTenant){
+    public R update(@RequestBody SysTenantEntity sysTenant) {
         ValidatorUtils.validateEntity(sysTenant);
         sysTenantService.updateById(sysTenant);
-        
+
         return R.ok();
     }
 
@@ -79,7 +77,7 @@ public class SysTenantController {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("sys:tenant:delete")
-    public R delete(@RequestBody Long[] tenantIds){
+    public R delete(@RequestBody Long[] tenantIds) {
         sysTenantService.removeByIds(Arrays.asList(tenantIds));
 
         return R.ok();
