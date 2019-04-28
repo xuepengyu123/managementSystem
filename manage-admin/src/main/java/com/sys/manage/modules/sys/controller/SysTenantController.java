@@ -44,7 +44,7 @@ public class SysTenantController {
     @RequestMapping("/info/{tenantId}")
     @RequiresPermissions("sys:tenant:info")
     public R info(@PathVariable("tenantId") Long tenantId) {
-        SysTenantEntity sysTenant = sysTenantService.getById(tenantId);
+        SysTenantEntity sysTenant = sysTenantService.info(tenantId);
         return R.ok().put("tenant", sysTenant);
     }
 
@@ -54,8 +54,7 @@ public class SysTenantController {
     @RequestMapping("/save")
     @RequiresPermissions("sys:tenant:save")
     public R save(@RequestBody SysTenantEntity sysTenant) {
-        sysTenant.setStatus(1);
-        sysTenantService.save(sysTenant);
+        sysTenantService.saveSysTenant(sysTenant);
         return R.ok();
     }
 
@@ -66,8 +65,7 @@ public class SysTenantController {
     @RequiresPermissions("sys:tenant:update")
     public R update(@RequestBody SysTenantEntity sysTenant) {
         ValidatorUtils.validateEntity(sysTenant);
-        sysTenantService.updateById(sysTenant);
-
+        sysTenantService.updateSysTenantEntityById(sysTenant);
         return R.ok();
     }
 
@@ -78,7 +76,6 @@ public class SysTenantController {
     @RequiresPermissions("sys:tenant:delete")
     public R delete(@RequestBody Long[] tenantIds) {
         sysTenantService.removeByIds(Arrays.asList(tenantIds));
-
         return R.ok();
     }
 
@@ -89,7 +86,6 @@ public class SysTenantController {
     @RequiresPermissions("sys:tenant:select")
     public R select() {
         List<SysTenantEntity> list = sysTenantService.list();
-
         return R.ok().put("list", list);
     }
 

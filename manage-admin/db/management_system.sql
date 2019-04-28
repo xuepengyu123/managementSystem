@@ -251,17 +251,35 @@ DROP TABLE IF EXISTS `sys_tenant`;
 CREATE TABLE `sys_tenant` (
   `tenant_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '租户id',
   `tenant_name` varchar(50) NOT NULL COMMENT '租户名称',
-  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
   `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`tenant_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10008 DEFAULT CHARSET=utf8 COMMENT='租户信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 COMMENT='租户信息表';
 
 -- ----------------------------
 -- Records of sys_tenant
 -- ----------------------------
-INSERT INTO `sys_tenant` VALUES ('10001', '系统租户', '系统租户', '1', '2019-04-28 10:50:08', '2019-04-28 10:52:35');
+INSERT INTO `sys_tenant` VALUES ('10001', '系统租户', '1', '2019-04-28 10:50:08', '2019-04-28 10:52:35');
+
+
+-- ----------------------------
+-- Table structure for sys_tenant_extend
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_tenant_extend`;
+CREATE TABLE `sys_tenant_extend` (
+   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '租户扩展表主键',
+   `tenant_id` bigint(20) NOT NULL COMMENT '租户id',
+   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='租户扩展表';
+
+-- ----------------------------
+-- Records of sys_tenant_extend
+-- ----------------------------
+INSERT INTO `sys_tenant_extend` VALUES ('1', '10001', '系统租户', '2019-04-28 14:38:24', '2019-04-28 14:38:38');
 
 -- ----------------------------
 -- Table structure for sys_user
