@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.manage.common.annotation.DataFilter;
 import com.sys.manage.modules.sys.dao.SysDeptDao;
 import com.sys.manage.modules.sys.entity.SysDeptEntity;
+import com.sys.manage.modules.sys.entity.SysTenantEntity;
 import com.sys.manage.modules.sys.service.SysDeptService;
+import com.sys.manage.modules.sys.service.SysTenantService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,10 +18,19 @@ import java.util.Map;
 @Service("sysDeptService")
 public class SysDeptServiceImpl extends ServiceImpl<SysDeptDao, SysDeptEntity> implements SysDeptService {
 
+    @Autowired
+    private SysTenantService sysTenantService;
     @Override
     @DataFilter(subDept = true, user = false, tableAlias = "t1")
     public List<SysDeptEntity> queryList(Map<String, Object> params) {
-        return baseMapper.queryList(params);
+        List<SysDeptEntity> sysDeptEntities = baseMapper.queryList(params);
+        for (SysDeptEntity sysDeptEntity: sysDeptEntities) {
+            SysTenantEntity sysTenantEntity = sysTenantService.getById(sysDeptEntity.getTenantId());
+            if (sysTenantEntity != null) {
+                sysDeptEntity.setTenantName(sysTenantEntity.getTenantName());
+            }
+        }
+        return sysDeptEntities;
     }
 
     @Override
