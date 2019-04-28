@@ -34,7 +34,6 @@ public class SysTenantController {
     @RequiresPermissions("sys:tenant:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = sysTenantService.queryPage(params);
-
         return R.ok().put("page", page);
     }
 
@@ -46,7 +45,6 @@ public class SysTenantController {
     @RequiresPermissions("sys:tenant:info")
     public R info(@PathVariable("tenantId") Long tenantId) {
         SysTenantEntity sysTenant = sysTenantService.getById(tenantId);
-
         return R.ok().put("tenant", sysTenant);
     }
 
@@ -56,6 +54,7 @@ public class SysTenantController {
     @RequestMapping("/save")
     @RequiresPermissions("sys:tenant:save")
     public R save(@RequestBody SysTenantEntity sysTenant) {
+        sysTenant.setStatus(1);
         sysTenantService.save(sysTenant);
         return R.ok();
     }
