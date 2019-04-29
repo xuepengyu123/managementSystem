@@ -1,6 +1,7 @@
 package com.sys.manage.modules.sys.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sys.manage.common.annotation.SysLog;
 import com.sys.manage.common.utils.PageUtils;
 import com.sys.manage.common.utils.R;
@@ -8,7 +9,9 @@ import com.sys.manage.common.validator.Assert;
 import com.sys.manage.common.validator.ValidatorUtils;
 import com.sys.manage.common.validator.group.AddGroup;
 import com.sys.manage.common.validator.group.UpdateGroup;
+import com.sys.manage.modules.sys.entity.SysUserChannelEntity;
 import com.sys.manage.modules.sys.entity.SysUserEntity;
+import com.sys.manage.modules.sys.service.SysUserChannelService;
 import com.sys.manage.modules.sys.service.SysUserRoleService;
 import com.sys.manage.modules.sys.service.SysUserService;
 import com.sys.manage.modules.sys.shiro.ShiroUtils;
@@ -33,6 +36,8 @@ public class SysUserController extends AbstractController {
     private SysUserService sysUserService;
     @Autowired
     private SysUserRoleService sysUserRoleService;
+    @Autowired
+    private SysUserChannelService sysUserChannelService;
 
     /**
      * 所有用户列表
@@ -41,7 +46,6 @@ public class SysUserController extends AbstractController {
     @RequiresPermissions("sys:user:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = sysUserService.queryPage(params);
-
         return R.ok().put("page", page);
     }
 
@@ -63,15 +67,17 @@ public class SysUserController extends AbstractController {
 
         //原密码
         password = ShiroUtils.sha256(password, getUser().getSalt());
-        //新密码
-        newPassword = ShiroUtils.sha256(newPassword, getUser().getSalt());
-
-        //更新密码
-        boolean flag = sysUserService.updatePassword(getUserId(), password, newPassword);
-        if (!flag) {
+        // 原密码校验
+        long userId = getUserId();
+        SysUserChannelEntity sysUserChannelEntity = sysUserChannelService.getOne(new QueryWrapper<SysUserChannelEntity>().eq("user_id", userId));
+        if (!password.equals(sysUserChannelEntity.getPassword())) {
             return R.error("原密码不正确");
         }
 
+        //新密码
+        newPassword = ShiroUtils.sha256(newPassword, getUser().getSalt());
+        //更新密码
+        sysUserChannelService.updatePassword(userId, newPassword);
         return R.ok();
     }
 
@@ -82,11 +88,9 @@ public class SysUserController extends AbstractController {
     @RequiresPermissions("sys:user:info")
     public R info(@PathVariable("userId") Long userId) {
         SysUserEntity user = sysUserService.getById(userId);
-
         //获取用户所属的角色列表
         List<Long> roleIdList = sysUserRoleService.queryRoleIdList(userId);
         user.setRoleIdList(roleIdList);
-
         return R.ok().put("user", user);
     }
 
@@ -98,9 +102,7 @@ public class SysUserController extends AbstractController {
     @RequiresPermissions("sys:user:save")
     public R save(@RequestBody SysUserEntity user) {
         ValidatorUtils.validateEntity(user, AddGroup.class);
-
         sysUserService.saveUser(user);
-
         return R.ok();
     }
 
@@ -112,9 +114,7 @@ public class SysUserController extends AbstractController {
     @RequiresPermissions("sys:user:update")
     public R update(@RequestBody SysUserEntity user) {
         ValidatorUtils.validateEntity(user, UpdateGroup.class);
-
-        sysUserService.update(user);
-
+        sysUserService.updateUserInfo(user);
         return R.ok();
     }
 
@@ -128,13 +128,10 @@ public class SysUserController extends AbstractController {
         if (ArrayUtils.contains(userIds, 1L)) {
             return R.error("系统管理员不能删除");
         }
-
         if (ArrayUtils.contains(userIds, getUserId())) {
             return R.error("当前用户不能删除");
         }
-
         sysUserService.removeByIds(Arrays.asList(userIds));
-
         return R.ok();
     }
 }

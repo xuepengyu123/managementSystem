@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : local
-Source Server Version : 50621
-Source Host           : localhost:3306
-Source Database       : management_system
-
-Target Server Type    : MYSQL
-Target Server Version : 50621
-File Encoding         : 65001
-
-Date: 2019-04-25 15:34:41
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -50,16 +35,12 @@ CREATE TABLE `sys_dept` (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='部门管理';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='部门管理';
 
 -- ----------------------------
 -- Records of sys_dept
 -- ----------------------------
-INSERT INTO `sys_dept` VALUES ('1', '0', '总公司', '0', '0', null, '2019-04-24 17:36:53', '2019-04-24 17:36:53');
-INSERT INTO `sys_dept` VALUES ('2', '1', '长沙分公司', '1', '0', null, '2019-04-24 17:36:53', '2019-04-24 17:36:53');
-INSERT INTO `sys_dept` VALUES ('3', '1', '上海分公司', '2', '0', null, '2019-04-24 17:36:53', '2019-04-24 17:36:53');
-INSERT INTO `sys_dept` VALUES ('4', '3', '技术部', '0', '0', null, '2019-04-24 17:36:53', '2019-04-24 17:36:53');
-INSERT INTO `sys_dept` VALUES ('5', '3', '销售部', '1', '0', null, '2019-04-24 17:36:53', '2019-04-24 17:36:53');
+INSERT INTO `sys_dept` VALUES ('1', '0', '系统部门', '0', '0', '10001', '2019-04-28 10:50:36', '2019-04-28 10:52:20');
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -102,17 +83,7 @@ CREATE TABLE `sys_log` (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='系统日志';
-
--- ----------------------------
--- Records of sys_log
--- ----------------------------
-INSERT INTO `sys_log` VALUES ('1', 'admin', '保存用户', 'com.sys.manage.modules.sys.controller.SysUserController.save()', '{\"userId\":2,\"username\":\"xuepengyu\",\"password\":\"fd1680c3c00e180cf7106ebe154624805c0e7741c497db7524d4967a4eba3ae3\",\"salt\":\"sX4hzYGHqxhmRlXJWGnR\",\"email\":\"123@qq.com\",\"mobile\":\"15232323322\",\"status\":1,\"roleIdList\":[],\"createTime\":\"Apr 23, 2019 3:12:10 PM\",\"deptId\":1,\"deptName\":\"总公司\"}', '326', '0:0:0:0:0:0:0:1', '2019-04-23 15:12:10', '2019-04-24 17:51:44');
-INSERT INTO `sys_log` VALUES ('2', 'admin', '保存角色', 'com.sys.manage.modules.sys.controller.SysRoleController.save()', '{\"roleId\":1,\"roleName\":\"第一个角色\",\"deptId\":1,\"deptName\":\"总公司\",\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,5,27,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45],\"deptIdList\":[1,2,3,4,5],\"createTime\":\"Apr 25, 2019 10:19:13 AM\"}', '361', '0:0:0:0:0:0:0:1', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_log` VALUES ('3', 'admin', '修改菜单', 'com.sys.manage.modules.sys.controller.SysMenuController.update()', '{\"menuId\":41,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"租户管理\",\"url\":\"modules/sys/systenantinfo.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":6,\"createTime\":\"Apr 25, 2019 9:57:03 AM\",\"updateTime\":\"Apr 25, 2019 9:57:03 AM\"}', '61', '0:0:0:0:0:0:0:1', '2019-04-25 13:58:21', '2019-04-25 13:58:21');
-INSERT INTO `sys_log` VALUES ('4', 'admin', '修改菜单', 'com.sys.manage.modules.sys.controller.SysMenuController.update()', '{\"menuId\":1,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"系统管理\",\"type\":0,\"icon\":\"fa fa-cog\",\"orderNum\":2,\"createTime\":\"Apr 24, 2019 5:49:23 PM\",\"updateTime\":\"Apr 24, 2019 5:49:46 PM\"}', '50', '0:0:0:0:0:0:0:1', '2019-04-25 13:59:01', '2019-04-25 13:59:01');
-INSERT INTO `sys_log` VALUES ('5', 'admin', '修改菜单', 'com.sys.manage.modules.sys.controller.SysMenuController.update()', '{\"menuId\":41,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"租户管理\",\"url\":\"modules/sys/systenantinfo.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":2,\"createTime\":\"Apr 25, 2019 9:57:03 AM\",\"updateTime\":\"Apr 25, 2019 9:57:03 AM\"}', '39', '0:0:0:0:0:0:0:1', '2019-04-25 13:59:20', '2019-04-25 13:59:20');
-INSERT INTO `sys_log` VALUES ('6', 'admin', '修改菜单', 'com.sys.manage.modules.sys.controller.SysMenuController.update()', '{\"menuId\":41,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"租户管理\",\"url\":\"modules/sys/tenant.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":2,\"createTime\":\"Apr 25, 2019 9:57:03 AM\",\"updateTime\":\"Apr 25, 2019 9:57:03 AM\"}', '93', '0:0:0:0:0:0:0:1', '2019-04-25 15:01:13', '2019-04-25 15:01:13');
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -130,7 +101,7 @@ CREATE TABLE `sys_menu` (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -145,7 +116,7 @@ INSERT INTO `sys_menu` VALUES ('16', '2', '新增', null, 'sys:user:save,sys:rol
 INSERT INTO `sys_menu` VALUES ('17', '2', '修改', null, 'sys:user:update,sys:role:select', '2', null, '0', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
 INSERT INTO `sys_menu` VALUES ('18', '2', '删除', null, 'sys:user:delete', '2', null, '0', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
 INSERT INTO `sys_menu` VALUES ('19', '3', '查看', null, 'sys:role:list,sys:role:info', '2', null, '0', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
-INSERT INTO `sys_menu` VALUES ('20', '3', '新增', null, 'sys:role:save,sys:menu:perms', '2', null, '0', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
+INSERT INTO `sys_menu` VALUES ('20', '3', '新增', null, 'sys:role:save,sys:menu:perms,sys:tenant:select', '2', null, '0', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
 INSERT INTO `sys_menu` VALUES ('21', '3', '修改', null, 'sys:role:update,sys:menu:perms', '2', null, '0', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
 INSERT INTO `sys_menu` VALUES ('22', '3', '删除', null, 'sys:role:delete', '2', null, '0', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
 INSERT INTO `sys_menu` VALUES ('23', '4', '查看', null, 'sys:menu:list,sys:menu:info', '2', null, '0', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
@@ -165,10 +136,10 @@ INSERT INTO `sys_menu` VALUES ('37', '36', '查看', null, 'sys:dict:list,sys:di
 INSERT INTO `sys_menu` VALUES ('38', '36', '新增', null, 'sys:dict:save', '2', null, '6', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
 INSERT INTO `sys_menu` VALUES ('39', '36', '修改', null, 'sys:dict:update', '2', null, '6', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
 INSERT INTO `sys_menu` VALUES ('40', '36', '删除', null, 'sys:dict:delete', '2', null, '6', '2019-04-24 17:49:23', '2019-04-24 17:49:46');
-INSERT INTO `sys_menu` VALUES ('41', '1', '租户管理', 'modules/sys/tenant.html', null, '1', 'fa fa-file-code-o', '2', '2019-04-25 09:57:03', '2019-04-25 09:57:03');
+INSERT INTO `sys_menu` VALUES ('41', '1', '租户管理', 'modules/sys/tenant.html', null, '1', 'fa fa-file-code-o', '1', '2019-04-25 09:57:03', '2019-04-25 09:57:03');
 INSERT INTO `sys_menu` VALUES ('42', '41', '查看', null, 'sys:tenant:list,sys:tenant:info', '2', null, '6', '2019-04-25 09:57:03', '2019-04-25 15:02:06');
 INSERT INTO `sys_menu` VALUES ('43', '41', '新增', null, 'sys:tenant:save', '2', null, '6', '2019-04-25 09:57:03', '2019-04-25 15:02:12');
-INSERT INTO `sys_menu` VALUES ('44', '41', '修改', null, 'sys:tenant:update', '2', null, '6', '2019-04-25 09:57:03', '2019-04-25 15:02:20');
+INSERT INTO `sys_menu` VALUES ('44', '41', '修改', null, 'sys:tenant:update,sys:tenant:info', '2', null, '6', '2019-04-25 09:57:03', '2019-04-25 15:02:20');
 INSERT INTO `sys_menu` VALUES ('45', '41', '删除', null, 'sys:tenant:delete', '2', null, '6', '2019-04-25 09:57:04', '2019-04-25 15:02:27');
 
 -- ----------------------------
@@ -184,10 +155,6 @@ CREATE TABLE `sys_oss` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件上传';
 
 -- ----------------------------
--- Records of sys_oss
--- ----------------------------
-
--- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
@@ -200,12 +167,12 @@ CREATE TABLE `sys_role` (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', '第一个角色', null, '1', '10001', '2019-04-25 10:19:13', '2019-04-25 11:47:25');
+INSERT INTO `sys_role` VALUES ('1', '系统角色', '系统角色', '1', '10001', '2019-04-28 10:55:55', '2019-04-28 10:56:38');
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -218,16 +185,12 @@ CREATE TABLE `sys_role_dept` (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
 
 -- ----------------------------
 -- Records of sys_role_dept
 -- ----------------------------
-INSERT INTO `sys_role_dept` VALUES ('1', '1', '1', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_dept` VALUES ('2', '1', '2', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_dept` VALUES ('3', '1', '3', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_dept` VALUES ('4', '1', '4', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_dept` VALUES ('5', '1', '5', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
+INSERT INTO `sys_role_dept` VALUES ('1', '1', '1', '2019-04-28 10:55:55', '2019-04-28 10:56:34');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -240,46 +203,81 @@ CREATE TABLE `sys_role_menu` (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=351 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO `sys_role_menu` VALUES ('1', '1', '1', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('2', '1', '2', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('3', '1', '15', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('4', '1', '16', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('5', '1', '17', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('6', '1', '18', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('7', '1', '3', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('8', '1', '19', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('9', '1', '20', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('10', '1', '21', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('11', '1', '22', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('12', '1', '4', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('13', '1', '23', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('14', '1', '24', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('15', '1', '25', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('16', '1', '26', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('17', '1', '5', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('18', '1', '27', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('19', '1', '29', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('20', '1', '30', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('21', '1', '31', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('22', '1', '32', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('23', '1', '33', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('24', '1', '34', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('25', '1', '35', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('26', '1', '36', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('27', '1', '37', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('28', '1', '38', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('29', '1', '39', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('30', '1', '40', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('31', '1', '41', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('32', '1', '42', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('33', '1', '43', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('34', '1', '44', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
-INSERT INTO `sys_role_menu` VALUES ('35', '1', '45', '2019-04-25 10:19:13', '2019-04-25 10:19:13');
+INSERT INTO `sys_role_menu` VALUES ('316', '12', '1', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('317', '12', '2', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('318', '12', '15', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('319', '12', '16', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('320', '12', '17', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('321', '12', '18', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('322', '12', '3', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('323', '12', '19', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('324', '12', '20', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('325', '12', '21', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('326', '12', '22', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('327', '12', '4', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('328', '12', '23', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('329', '12', '24', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('330', '12', '25', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('331', '12', '26', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('332', '12', '5', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('333', '12', '27', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('334', '12', '29', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('335', '12', '30', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('336', '12', '31', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('337', '12', '32', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('338', '12', '33', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('339', '12', '34', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('340', '12', '35', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('341', '12', '36', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('342', '12', '37', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('343', '12', '38', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('344', '12', '39', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('345', '12', '40', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('346', '12', '41', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('347', '12', '42', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('348', '12', '43', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('349', '12', '44', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('350', '12', '45', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('351', '1', '1', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('352', '1', '2', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('353', '1', '15', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('354', '1', '16', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('355', '1', '17', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('356', '1', '18', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('357', '1', '3', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('358', '1', '19', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('359', '1', '20', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('360', '1', '21', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('361', '1', '22', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('362', '1', '4', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('363', '1', '23', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('364', '1', '24', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('365', '1', '25', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('366', '1', '26', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('367', '1', '5', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('368', '1', '27', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('369', '1', '29', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('370', '1', '30', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('371', '1', '31', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('372', '1', '32', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('373', '1', '33', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('374', '1', '34', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('375', '1', '35', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('376', '1', '36', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('377', '1', '37', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('378', '1', '38', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('379', '1', '39', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('380', '1', '40', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('381', '1', '41', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('382', '1', '42', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('383', '1', '43', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('384', '1', '44', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('385', '1', '45', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
 
 -- ----------------------------
 -- Table structure for sys_tenant
@@ -292,61 +290,93 @@ CREATE TABLE `sys_tenant` (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`tenant_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10004 DEFAULT CHARSET=utf8 COMMENT='租户信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 COMMENT='租户信息表';
 
 -- ----------------------------
 -- Records of sys_tenant
 -- ----------------------------
-INSERT INTO `sys_tenant` VALUES ('10001', '这是第一个租户', '1', '2019-04-24 18:14:35', '2019-04-24 18:14:53');
-INSERT INTO `sys_tenant` VALUES ('10002', '租户2', '1', '2019-04-25 10:02:52', '2019-04-25 10:02:52');
+INSERT INTO `sys_tenant` VALUES ('10001', '系统租户', '1', '2019-04-28 10:50:08', '2019-04-28 10:52:35');
+
 
 -- ----------------------------
--- Table structure for sys_test
+-- Table structure for sys_tenant_extend
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_test`;
-CREATE TABLE `sys_test` (
-  `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) DEFAULT NULL COMMENT '用户名',
-  `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
-  `mobile` varchar(100) DEFAULT NULL COMMENT '手机号',
-  `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统用户';
+DROP TABLE IF EXISTS `sys_tenant_extend`;
+CREATE TABLE `sys_tenant_extend` (
+   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '租户扩展表主键',
+   `tenant_id` bigint(20) NOT NULL COMMENT '租户id',
+   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='租户扩展表';
 
 -- ----------------------------
--- Records of sys_test
+-- Records of sys_tenant_extend
 -- ----------------------------
-INSERT INTO `sys_test` VALUES ('1', 'admin', 'root@renren.io', '13612345678', '1', '2016-11-11 11:11:11', '2019-04-24 17:42:46');
-INSERT INTO `sys_test` VALUES ('2', 'xuepengyu123', null, null, '1', null, '2019-04-24 17:42:46');
+INSERT INTO `sys_tenant_extend` VALUES ('1', '10001', '系统租户', '2019-04-28 14:38:24', '2019-04-28 14:38:38');
 
 -- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
-  `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL COMMENT '用户名',
-  `password` varchar(100) DEFAULT NULL COMMENT '密码',
-  `salt` varchar(20) DEFAULT NULL COMMENT '盐',
-  `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
-  `mobile` varchar(100) DEFAULT NULL COMMENT '手机号',
-  `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
-  `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
-  `tenant_id` bigint(20) DEFAULT NULL COMMENT '租户id',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统用户';
+    `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `username` varchar(50) NOT NULL COMMENT '用户名',
+    `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
+    `mobile` varchar(100) DEFAULT NULL COMMENT '手机号',
+    `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
+    `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
+    `tenant_id` bigint(20) DEFAULT NULL COMMENT '租户id',
+    `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`user_id`),
+    UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'xuepy@belink.com', '13612345678', '1', '1', null, '2016-11-11 11:11:11', '2019-04-24 17:39:39');
-INSERT INTO `sys_user` VALUES ('2', 'xuepengyu', 'fd1680c3c00e180cf7106ebe154624805c0e7741c497db7524d4967a4eba3ae3', 'sX4hzYGHqxhmRlXJWGnR', '123@qq.com', '15232323322', '1', '1', null, '2019-04-23 15:12:10', '2019-04-24 17:39:39');
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'xuepy@belink.com', '13612345678', '1', '1', '10001', '2016-11-11 11:11:11', '2019-04-28 10:52:54');
+
+-- ----------------------------
+-- Table structure for sys_user_channel
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_channel`;
+CREATE TABLE `sys_user_channel` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户渠道表主键',
+    `user_id` bigint(20) NOT NULL COMMENT '用户主键',
+    `channel` varchar(50) DEFAULT NULL COMMENT '渠道',
+    `password` varchar(100) DEFAULT NULL COMMENT '密码',
+    `salt` varchar(20) DEFAULT NULL COMMENT '盐',
+    `status` tinyint(4) DEFAULT NULL COMMENT '状态',
+    `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户渠道表';
+
+-- ----------------------------
+-- Records of sys_user_channel
+-- ----------------------------
+INSERT INTO `sys_user_channel` VALUES ('1', '1', '系统', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', '1', '2019-04-28 17:05:45', '2019-04-28 17:05:45');
+
+-- ----------------------------
+-- Table structure for sys_user_extend
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_extend`;
+CREATE TABLE `sys_user_extend` (
+   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户扩展表主键',
+   `user_id` bigint(20) NOT NULL COMMENT '用户id',
+   `user_portrait` text COMMENT '用户头像',
+   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户扩展表';
+
+-- ----------------------------
+-- Records of sys_user_extend
+-- ----------------------------
+INSERT INTO `sys_user_extend` VALUES ('1', '1', null, '2019-04-28 17:05:53', '2019-04-28 17:05:53');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -359,8 +389,4 @@ CREATE TABLE `sys_user_role` (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
-
--- ----------------------------
--- Records of sys_user_role
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';

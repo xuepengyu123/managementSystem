@@ -11,11 +11,9 @@ import com.sys.manage.common.utils.Query;
 import com.sys.manage.modules.sys.dao.SysUserDao;
 import com.sys.manage.modules.sys.entity.SysDeptEntity;
 import com.sys.manage.modules.sys.entity.SysTenantEntity;
+import com.sys.manage.modules.sys.entity.SysUserChannelEntity;
 import com.sys.manage.modules.sys.entity.SysUserEntity;
-import com.sys.manage.modules.sys.service.SysDeptService;
-import com.sys.manage.modules.sys.service.SysTenantService;
-import com.sys.manage.modules.sys.service.SysUserRoleService;
-import com.sys.manage.modules.sys.service.SysUserService;
+import com.sys.manage.modules.sys.service.*;
 import com.sys.manage.modules.sys.shiro.ShiroUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
@@ -23,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +38,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
     private SysDeptService sysDeptService;
     @Autowired
     private SysTenantService sysTenantService;
+    @Autowired
+    private SysUserChannelService sysUserChannelService;
 
     @Override
     public List<Long> queryAllMenuId(Long userId) {
@@ -75,11 +74,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveUser(SysUserEntity user) {
-        //sha256加密
-        String salt = RandomStringUtils.randomAlphanumeric(20);
-        user.setSalt(salt);
-        user.setPassword(ShiroUtils.sha256(user.getPassword(), user.getSalt()));
+        // 保存用户信息
         this.save(user);
+
+        //sha256加密
+        SysUserChannelEntity sysUserChannelEntity = new SysUserChannelEntity();
+        String salt = RandomStringUtils.randomAlphanumeric(20);
+        sysUserChannelEntity.setSalt(salt);
+        sysUserChannelEntity.setPassword(ShiroUtils.sha256(user.getPassword(), salt));
+        sysUserChannelEntity.setUserId(user.getUserId());
+        sysUserChannelEntity.setStatus(1);
+        // 保存用户渠道信息
+        sysUserChannelService.save(sysUserChannelEntity);
 
         //保存用户与角色关系
         sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
@@ -87,14 +93,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(SysUserEntity user) {
-        if (StringUtils.isBlank(user.getPassword())) {
-            user.setPassword(null);
-        } else {
-            SysUserEntity userEntity = this.getById(user.getUserId());
-            user.setPassword(ShiroUtils.sha256(user.getPassword(), userEntity.getSalt()));
-        }
+    public void updateUserInfo(SysUserEntity user) {
+        // 更新用户表
         this.updateById(user);
+        // 更新用户渠道表
+        SysUserChannelEntity userChannelEntity = sysUserChannelService.getByUserId(user.getUserId());
+        if (StringUtils.isNotBlank(user.getPassword())) {
+            userChannelEntity.setPassword(ShiroUtils.sha256(user.getPassword(), userChannelEntity.getSalt()));
+        }
+        sysUserChannelService.updateById(userChannelEntity);
 
         //保存用户与角色关系
         sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());

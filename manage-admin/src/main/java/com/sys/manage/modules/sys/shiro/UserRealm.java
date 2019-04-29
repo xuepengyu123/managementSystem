@@ -5,7 +5,9 @@ import com.sys.manage.common.utils.Constant;
 import com.sys.manage.modules.sys.dao.SysMenuDao;
 import com.sys.manage.modules.sys.dao.SysUserDao;
 import com.sys.manage.modules.sys.entity.SysMenuEntity;
+import com.sys.manage.modules.sys.entity.SysUserChannelEntity;
 import com.sys.manage.modules.sys.entity.SysUserEntity;
+import com.sys.manage.modules.sys.service.SysUserChannelService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
@@ -31,6 +33,8 @@ public class UserRealm extends AuthorizingRealm {
     private SysUserDao sysUserDao;
     @Autowired
     private SysMenuDao sysMenuDao;
+    @Autowired
+    private SysUserChannelService sysUserChannelService;
 
     /**
      * 授权(验证权限时调用)
@@ -86,10 +90,13 @@ public class UserRealm extends AuthorizingRealm {
         if (user.getStatus() == 0) {
             throw new LockedAccountException("账号已被锁定,请联系管理员");
         }
-
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
+        // 获取用户渠道表中的密码与秘钥
+        SysUserChannelEntity sysUserChannelEntity = sysUserChannelService.getByUserId(user.getUserId());
+        String password = sysUserChannelEntity.getPassword();
+        String salt = sysUserChannelEntity.getSalt();
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user,password, ByteSource.Util.bytes(salt), getName());
         return info;
-    }
+}
 
     @Override
     public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {

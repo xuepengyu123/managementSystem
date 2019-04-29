@@ -1,42 +1,47 @@
 package com.sys.manage.modules.sys.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
- * 租户信息表
+ * 用户渠道表
  * 
  * @author xue
  * @email xuepy@belink.com
- * @date 2019-04-25 09:30:33
+ * @date 2019-04-28 17:10:42
  */
 @Data
-@TableName("sys_tenant")
-public class SysTenantEntity implements Serializable {
+@TableName("sys_user_channel")
+public class SysUserChannelEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 租户id
+	 * 用户渠道表主键
 	 */
 	@TableId
-	private Long tenantId;
+	private Long id;
 	/**
-	 * 租户名称
+	 * 用户主键
 	 */
-	private String tenantName;
+	private Long userId;
 	/**
-	 * 备注
+	 * 渠道
 	 */
-	@TableField(exist = false)
-	private String remark;
+	private String channel;
 	/**
-	 * 状态  0：禁用   1：正常
+	 * 密码
+	 */
+	private String password;
+	/**
+	 * 盐
+	 */
+	private String salt;
+	/**
+	 * 状态
 	 */
 	private Integer status;
 	/**
@@ -44,7 +49,7 @@ public class SysTenantEntity implements Serializable {
 	 */
 	private Date createTime;
 	/**
-	 * 修改时间
+	 * 更新时间
 	 */
 	private Date updateTime;
 
