@@ -243,6 +243,41 @@ INSERT INTO `sys_role_menu` VALUES ('347', '12', '42', '2019-04-28 10:55:55', '2
 INSERT INTO `sys_role_menu` VALUES ('348', '12', '43', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
 INSERT INTO `sys_role_menu` VALUES ('349', '12', '44', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
 INSERT INTO `sys_role_menu` VALUES ('350', '12', '45', '2019-04-28 10:55:55', '2019-04-28 10:55:55');
+INSERT INTO `sys_role_menu` VALUES ('351', '1', '1', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('352', '1', '2', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('353', '1', '15', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('354', '1', '16', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('355', '1', '17', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('356', '1', '18', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('357', '1', '3', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('358', '1', '19', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('359', '1', '20', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('360', '1', '21', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('361', '1', '22', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('362', '1', '4', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('363', '1', '23', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('364', '1', '24', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('365', '1', '25', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('366', '1', '26', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('367', '1', '5', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('368', '1', '27', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('369', '1', '29', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('370', '1', '30', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('371', '1', '31', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('372', '1', '32', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('373', '1', '33', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('374', '1', '34', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('375', '1', '35', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('376', '1', '36', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('377', '1', '37', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('378', '1', '38', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('379', '1', '39', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('380', '1', '40', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('381', '1', '41', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('382', '1', '42', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('383', '1', '43', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('384', '1', '44', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
+INSERT INTO `sys_role_menu` VALUES ('385', '1', '45', '2019-04-29 14:18:23', '2019-04-29 14:18:23');
 
 -- ----------------------------
 -- Table structure for sys_tenant
@@ -286,25 +321,62 @@ INSERT INTO `sys_tenant_extend` VALUES ('1', '10001', '系统租户', '2019-04-2
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
-  `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL COMMENT '用户名',
-  `password` varchar(100) DEFAULT NULL COMMENT '密码',
-  `salt` varchar(20) DEFAULT NULL COMMENT '盐',
-  `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
-  `mobile` varchar(100) DEFAULT NULL COMMENT '手机号',
-  `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
-  `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
-  `tenant_id` bigint(20) DEFAULT NULL COMMENT '租户id',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='系统用户';
+    `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `username` varchar(50) NOT NULL COMMENT '用户名',
+    `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
+    `mobile` varchar(100) DEFAULT NULL COMMENT '手机号',
+    `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
+    `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
+    `tenant_id` bigint(20) DEFAULT NULL COMMENT '租户id',
+    `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`user_id`),
+    UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'xuepy@belink.com', '13612345678', '1', '1', '10001', '2016-11-11 11:11:11', '2019-04-28 10:52:54');
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'xuepy@belink.com', '13612345678', '1', '1', '10001', '2016-11-11 11:11:11', '2019-04-28 10:52:54');
+
+-- ----------------------------
+-- Table structure for sys_user_channel
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_channel`;
+CREATE TABLE `sys_user_channel` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户渠道表主键',
+    `user_id` bigint(20) NOT NULL COMMENT '用户主键',
+    `channel` varchar(50) DEFAULT NULL COMMENT '渠道',
+    `password` varchar(100) DEFAULT NULL COMMENT '密码',
+    `salt` varchar(20) DEFAULT NULL COMMENT '盐',
+    `status` tinyint(4) DEFAULT NULL COMMENT '状态',
+    `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户渠道表';
+
+-- ----------------------------
+-- Records of sys_user_channel
+-- ----------------------------
+INSERT INTO `sys_user_channel` VALUES ('1', '1', '系统', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', '1', '2019-04-28 17:05:45', '2019-04-28 17:05:45');
+
+-- ----------------------------
+-- Table structure for sys_user_extend
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_extend`;
+CREATE TABLE `sys_user_extend` (
+   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户扩展表主键',
+   `user_id` bigint(20) NOT NULL COMMENT '用户id',
+   `user_portrait` text COMMENT '用户头像',
+   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户扩展表';
+
+-- ----------------------------
+-- Records of sys_user_extend
+-- ----------------------------
+INSERT INTO `sys_user_extend` VALUES ('1', '1', null, '2019-04-28 17:05:53', '2019-04-28 17:05:53');
 
 -- ----------------------------
 -- Table structure for sys_user_role

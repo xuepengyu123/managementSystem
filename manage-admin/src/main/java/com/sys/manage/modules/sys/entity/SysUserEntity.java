@@ -42,11 +42,13 @@ public class SysUserEntity implements Serializable {
      */
     @NotBlank(message = "密码不能为空", groups = AddGroup.class)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @TableField(exist = false)
     private String password;
 
     /**
      * 盐
      */
+    @TableField(exist = false)
     private String salt;
 
     /**
