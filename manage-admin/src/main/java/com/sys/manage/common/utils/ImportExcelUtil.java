@@ -1,12 +1,17 @@
 package com.sys.manage.common.utils;
+
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * @ClassName: ImportExcelUtil
  * @Description: 导入excel工具类
@@ -14,6 +19,7 @@ import java.util.Map;
  * @Date 2019/4/30
  */
 public class ImportExcelUtil {
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     private POIFSFileSystem fs;
     private HSSFWorkbook wb;
@@ -22,6 +28,7 @@ public class ImportExcelUtil {
 
     /**
      * 读取Excel表格表头的内容
+     *
      * @param is
      * @return String 表头内容的数组
      */
@@ -30,7 +37,7 @@ public class ImportExcelUtil {
             fs = new POIFSFileSystem(is);
             wb = new HSSFWorkbook(fs);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         sheet = wb.getSheetAt(0);
         //得到首行的row
@@ -46,6 +53,7 @@ public class ImportExcelUtil {
 
     /**
      * 读取Excel数据内容
+     *
      * @param is
      * @return Map 包含单元格数据内容的Map对象
      */
@@ -56,7 +64,7 @@ public class ImportExcelUtil {
             fs = new POIFSFileSystem(is);
             wb = new HSSFWorkbook(fs);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         sheet = wb.getSheetAt(0);
         // 得到总行数
@@ -115,8 +123,7 @@ public class ImportExcelUtil {
     /**
      * 获取单元格数据内容为日期类型的数据
      *
-     * @param cell
-     *            Excel单元格
+     * @param cell Excel单元格
      * @return String 单元格数据内容
      */
     private String getDateCellValue(HSSFCell cell) {
@@ -134,14 +141,14 @@ public class ImportExcelUtil {
                 result = "";
             }
         } catch (Exception e) {
-            System.out.println("日期格式不正确!");
-            e.printStackTrace();
+            logger.error("日期格式错误", e);
         }
         return result;
     }
 
     /**
      * 根据HSSFCell类型设置数据
+     *
      * @param cell
      * @return
      */

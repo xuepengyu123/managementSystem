@@ -4,6 +4,8 @@ import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * @ClassName: ExportExcelUtil
  * @Description: 导出excel工具类
@@ -18,6 +21,7 @@ import java.util.List;
  * @Date 2019/4/30
  */
 public class ExportExcelUtil {
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * 显示的导出表的标题
@@ -46,7 +50,6 @@ public class ExportExcelUtil {
 
 
     /**
-     *
      * @param title
      * @param columnName
      * @param dataList
@@ -54,12 +57,12 @@ public class ExportExcelUtil {
      * @param response
      * @description 构造方法，传入要导出的数据
      */
-    public ExportExcelUtil(String title, String[] columnName, List<Object[]> dataList,HttpServletRequest request,HttpServletResponse response) {
+    public ExportExcelUtil(String title, String[] columnName, List<Object[]> dataList, HttpServletRequest request, HttpServletResponse response) {
         this.dataList = dataList;
         this.columnName = columnName;
         this.title = title;
         this.request = request;
-        this.response= response;
+        this.response = response;
     }
 
 
@@ -162,12 +165,11 @@ public class ExportExcelUtil {
                     OutputStream out1 = response.getOutputStream();
                     workbook.write(out1);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage(), e);
                 }
             }
-
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 
