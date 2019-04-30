@@ -16,5 +16,28 @@ import java.util.Map;
 public interface SysTenantService extends IService<SysTenantEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    /**
+     * 通过租户id，查询租户信息
+     *
+     * @param tenantId
+     * @return
+     */
+    SysTenantEntity info(Long tenantId);
+
+    /**
+     * 保存租户信息
+     *
+     * @param sysTenant
+     */
+    void saveSysTenant(SysTenantEntity sysTenant);
+
+    /**
+     * 更新租户信息
+     *
+     * @param sysTenant
+     */
+    void updateSysTenantEntityById(SysTenantEntity sysTenant);
+
 }
 
