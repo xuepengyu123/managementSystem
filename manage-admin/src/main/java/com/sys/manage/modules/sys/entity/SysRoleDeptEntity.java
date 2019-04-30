@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 角色与部门对应关系
@@ -28,6 +29,14 @@ public class SysRoleDeptEntity implements Serializable {
      * 部门ID
      */
     private Long deptId;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
 
 
 }

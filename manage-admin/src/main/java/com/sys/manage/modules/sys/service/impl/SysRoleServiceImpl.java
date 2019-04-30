@@ -10,7 +10,9 @@ import com.sys.manage.common.utils.Query;
 import com.sys.manage.modules.sys.dao.SysRoleDao;
 import com.sys.manage.modules.sys.entity.SysDeptEntity;
 import com.sys.manage.modules.sys.entity.SysRoleEntity;
+import com.sys.manage.modules.sys.entity.SysTenantEntity;
 import com.sys.manage.modules.sys.service.*;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -36,12 +39,13 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
     private SysUserRoleService sysUserRoleService;
     @Autowired
     private SysDeptService sysDeptService;
+    @Autowired
+    private SysTenantService sysTenantService;
 
     @Override
     @DataFilter(subDept = true, user = false)
     public PageUtils queryPage(Map<String, Object> params) {
         String roleName = (String) params.get("roleName");
-
         IPage<SysRoleEntity> page = this.page(
                 new Query<SysRoleEntity>().getPage(params),
                 new QueryWrapper<SysRoleEntity>()
@@ -50,19 +54,23 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
         );
 
         for (SysRoleEntity sysRoleEntity : page.getRecords()) {
+            // 查询机构名称
             SysDeptEntity sysDeptEntity = sysDeptService.getById(sysRoleEntity.getDeptId());
             if (sysDeptEntity != null) {
                 sysRoleEntity.setDeptName(sysDeptEntity.getName());
             }
+            // 查询租户名称
+            SysTenantEntity sysTenantEntity = sysTenantService.getById(sysRoleEntity.getTenantId());
+            if (sysTenantEntity != null) {
+                sysRoleEntity.setTenantName(sysTenantEntity.getTenantName());
+            }
         }
-
         return new PageUtils(page);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveRole(SysRoleEntity role) {
-        role.setCreateTime(new Date());
         this.save(role);
 
         //保存角色与菜单关系

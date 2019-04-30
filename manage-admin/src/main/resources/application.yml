@@ -65,3 +65,12 @@ mybatis-plus:
     cache-enabled: false
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
+
+#文件上传路径
+ms:
+  upload:
+    url: E:\data\upload_tmp
+
+#是否开启验证码
+#与longin.html中页面显示一起使用
+sys.verification.code: false

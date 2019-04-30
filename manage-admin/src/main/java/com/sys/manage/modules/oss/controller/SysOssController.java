@@ -1,28 +1,25 @@
 package com.sys.manage.modules.oss.controller;
 
-import com.google.gson.Gson;
 import com.sys.manage.common.exception.RRException;
 import com.sys.manage.common.utils.ConfigConstant;
-import com.sys.manage.common.utils.Constant;
 import com.sys.manage.common.utils.PageUtils;
 import com.sys.manage.common.utils.R;
-import com.sys.manage.common.validator.ValidatorUtils;
-import com.sys.manage.common.validator.group.AliyunGroup;
-import com.sys.manage.common.validator.group.QcloudGroup;
-import com.sys.manage.common.validator.group.QiniuGroup;
-import com.sys.manage.modules.oss.cloud.CloudStorageConfig;
-import com.sys.manage.modules.oss.cloud.OSSFactory;
 import com.sys.manage.modules.oss.entity.SysOssEntity;
 import com.sys.manage.modules.oss.service.SysOssService;
 import com.sys.manage.modules.sys.service.SysConfigService;
+import org.apache.commons.io.IOUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
@@ -40,7 +37,12 @@ public class SysOssController {
     private SysOssService sysOssService;
     @Autowired
     private SysConfigService sysConfigService;
-
+    /**
+      *文件上传路径
+      * @author wangtiantian
+      **/
+    @Value("${ms.upload.url}")
+    private String uploadUrl;
     /**
      * 列表
      */
@@ -51,45 +53,6 @@ public class SysOssController {
 
         return R.ok().put("page", page);
     }
-
-
-    /**
-     * 云存储配置信息
-     */
-    @RequestMapping("/config")
-    @RequiresPermissions("sys:oss:all")
-    public R config() {
-        CloudStorageConfig config = sysConfigService.getConfigObject(KEY, CloudStorageConfig.class);
-
-        return R.ok().put("config", config);
-    }
-
-
-    /**
-     * 保存云存储配置信息
-     */
-    @RequestMapping("/saveConfig")
-    @RequiresPermissions("sys:oss:all")
-    public R saveConfig(@RequestBody CloudStorageConfig config) {
-        //校验类型
-        ValidatorUtils.validateEntity(config);
-
-        if (config.getType() == Constant.CloudService.QINIU.getValue()) {
-            //校验七牛数据
-            ValidatorUtils.validateEntity(config, QiniuGroup.class);
-        } else if (config.getType() == Constant.CloudService.ALIYUN.getValue()) {
-            //校验阿里云数据
-            ValidatorUtils.validateEntity(config, AliyunGroup.class);
-        } else if (config.getType() == Constant.CloudService.QCLOUD.getValue()) {
-            //校验腾讯云数据
-            ValidatorUtils.validateEntity(config, QcloudGroup.class);
-        }
-
-        sysConfigService.updateValueByKey(KEY, new Gson().toJson(config));
-
-        return R.ok();
-    }
-
 
     /**
      * 上传文件
@@ -102,16 +65,24 @@ public class SysOssController {
         }
 
         //上传文件
-        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-        String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix);
+        String fileName = file.getOriginalFilename();
+        String fileType = fileName.substring(fileName.lastIndexOf("."));
+        long time = new Date().getTime();
+        String newFileName = "ms_"+time+fileType;
+        File file1 = new File(uploadUrl,newFileName);
+        InputStream inputStream = file.getInputStream();
+        FileOutputStream fileOutputStream = new FileOutputStream(file1);
+        IOUtils.copy(inputStream,fileOutputStream);
+        inputStream.close();
+        fileOutputStream.close();
 
         //保存文件信息
         SysOssEntity ossEntity = new SysOssEntity();
-        ossEntity.setUrl(url);
+        ossEntity.setUrl(uploadUrl);
         ossEntity.setCreateDate(new Date());
         sysOssService.save(ossEntity);
 
-        return R.ok().put("url", url);
+        return R.ok().put("url", uploadUrl);
     }
 
 

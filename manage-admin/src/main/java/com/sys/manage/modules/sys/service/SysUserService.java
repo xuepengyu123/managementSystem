@@ -30,7 +30,7 @@ public interface SysUserService extends IService<SysUserEntity> {
     /**
      * 修改用户
      */
-    void update(SysUserEntity user);
+    void updateUserInfo(SysUserEntity user);
 
     /**
      * 修改密码

@@ -3,9 +3,10 @@ $(function () {
         url: baseURL + 'sys/role/list',
         datatype: "json",
         colModel: [
-            { label: '角色ID', name: 'roleId', index: "role_id", width: 45, key: true },
+            { label: '角色ID', name: 'roleId', index: "role_id", width: 45, key: true, hidden:true },
             { label: '角色名称', name: 'roleName', index: "role_name", width: 75 },
             { label: '所属部门', name: 'deptName', sortable: false, width: 75 },
+            { label: '所属租户', name: 'tenantName',index: "tenant_name", width: 75},
             { label: '备注', name: 'remark', width: 100 },
             { label: '创建时间', name: 'createTime', index: "create_time", width: 80}
         ],
@@ -101,6 +102,7 @@ var vm = new Vue({
         },
         showList: true,
         title:null,
+        tenantList:{},
         role:{
             deptId:null,
             deptName:null
@@ -113,10 +115,13 @@ var vm = new Vue({
         add: function(){
             vm.showList = false;
             vm.title = "新增";
-            vm.role = {deptName:null, deptId:null};
+            vm.tenantList = {};
+            vm.role = {deptName: null, deptId: null,tenantId:null};
             vm.getMenuTree(null);
 
             vm.getDept();
+            //获取租户列表
+            vm.getTenantList();
 
             vm.getDataTree();
         },
@@ -130,7 +135,8 @@ var vm = new Vue({
             vm.title = "修改";
             vm.getDataTree();
             vm.getMenuTree(roleId);
-
+            //获取租户列表
+            this.getTenantList();
             vm.getDept();
         },
         del: function () {
@@ -222,6 +228,11 @@ var vm = new Vue({
                 if(roleId != null){
                     vm.getRole(roleId);
                 }
+            });
+        },
+        getTenantList: function () {
+            $.get(baseURL + "sys/tenant/select", function (r) {
+                vm.tenantList = r.list;
             });
         },
         getDataTree: function(roleId) {

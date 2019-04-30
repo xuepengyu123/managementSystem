@@ -42,11 +42,13 @@ public class SysUserEntity implements Serializable {
      */
     @NotBlank(message = "密码不能为空", groups = AddGroup.class)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @TableField(exist = false)
     private String password;
 
     /**
      * 盐
      */
+    @TableField(exist = false)
     private String salt;
 
     /**
@@ -76,6 +78,20 @@ public class SysUserEntity implements Serializable {
      * 创建时间
      */
     private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
+    /**
+     /**
+     * 租户id
+     */
+    private Long tenantId;
+    /**
+     * 租户名称
+     */
+    @TableField(exist = false)
+    private String tenantName;
 
     /**
      * 部门ID

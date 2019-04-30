@@ -35,7 +35,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("后台管理熊")
+                .title("后台管理系统")
                 .description("management-admin文档")
                 .termsOfServiceUrl("")
                 .version("4.0.0")

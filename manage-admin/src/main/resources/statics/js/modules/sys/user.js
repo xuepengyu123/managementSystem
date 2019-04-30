@@ -6,7 +6,8 @@ $(function () {
 			{ label: '用户ID', name: 'userId', index: "user_id", width: 45, key: true },
 			{ label: '用户名', name: 'username', width: 75 },
             { label: '所属部门', name: 'deptName', sortable: false, width: 75 },
-			{ label: '邮箱', name: 'email', width: 90 },
+            { label: '所属租戶', name: 'tenantName', sortable: false, width: 75 },
+            { label: '邮箱', name: 'email', width: 90 },
 			{ label: '手机号', name: 'mobile', width: 100 },
 			{ label: '状态', name: 'status', width: 60, formatter: function(value, options, row){
 				return value === 0 ? 
@@ -65,6 +66,7 @@ var vm = new Vue({
         showList: true,
         title:null,
         roleList:{},
+        tenantList: {},
         user:{
             status:1,
             deptId:null,
@@ -80,12 +82,14 @@ var vm = new Vue({
             vm.showList = false;
             vm.title = "新增";
             vm.roleList = {};
+            vm.tenantList = {};
             vm.user = {deptName:null, deptId:null, status:1, roleIdList:[]};
 
             //获取角色信息
             this.getRoleList();
 
             vm.getDept();
+            vm.getTenantList();
         },
         getDept: function(){
             //加载部门树
@@ -111,6 +115,7 @@ var vm = new Vue({
             vm.getUser(userId);
             //获取角色信息
             this.getRoleList();
+            vm.getTenantList();
         },
         permissions: function () {
             var userId = getSelectedRow();
@@ -173,6 +178,11 @@ var vm = new Vue({
         getRoleList: function(){
             $.get(baseURL + "sys/role/select", function(r){
                 vm.roleList = r.list;
+            });
+        },
+        getTenantList: function () {
+            $.get(baseURL + "sys/tenant/select", function (r) {
+                vm.tenantList = r.list;
             });
         },
         deptTree: function(){
